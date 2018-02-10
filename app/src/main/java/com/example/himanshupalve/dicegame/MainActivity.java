@@ -2,6 +2,7 @@ package com.example.himanshupalve.dicegame;
 
 import android.graphics.drawable.Drawable;
 import android.media.Image;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -18,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
     int Turnscore=0;
     int compscore=0,playerscore=0;
     boolean turn,game;
-
+    Handler handler;
     public MainActivity() {
         turn = false;
         game=true;
@@ -34,45 +35,52 @@ public class MainActivity extends AppCompatActivity {
     {
         if(!game) return;
         int r=0,d;
-//        ImageView i=(ImageView)findViewById(R.id.DiceImage);
+        ImageView i=(ImageView)findViewById(R.id.DiceImage);
         Random rand = new Random();
-        while (r<=2)
+        while (r==0)
         {
-            d=rand.nextInt(6);
-//            switch (d)
-//            {
-//                case 1:
-//                    i.setImageResource(R.drawable.dice1);
-//                    Turnscore=0;
-//                    setscore();
-//                    break;
-//                case 2:i.setImageResource(R.drawable.dice2);
-//                    break;
-//                case 3:i.setImageResource(R.drawable.dice3);
-//                    break;
-//                case 4:i.setImageResource(R.drawable.dice4);
-//                    break;
-//                case 5:i.setImageResource(R.drawable.dice5);
-//                    break;
-//                case 6:i.setImageResource(R.drawable.dice6);
-//                    break;
-//            }
+            d=rand.nextInt(6)+1;
+            switch (d)
+            {
+                case 1:
+                    i.setImageResource(R.drawable.dice1);
+                    Turnscore=0;
+                    setscore();
+                    break;
+                case 2:i.setImageResource(R.drawable.dice2);
+                    break;
+                case 3:i.setImageResource(R.drawable.dice3);
+                    break;
+                case 4:i.setImageResource(R.drawable.dice4);
+                    break;
+                case 5:i.setImageResource(R.drawable.dice5);
+                    break;
+                case 6:i.setImageResource(R.drawable.dice6);
+                    break;
+            }
             if(d!=1)
             {
                 Turnscore+=d;
             }
             else break;
-            r=rand.nextInt(4);
+            r=rand.nextInt(2);
             disp();
+            handler.postDelayed(th,1000);
         }
         setscore();
+//        new android.os.Handler().postDelayed();
     }
+    Runnable th=new Runnable() {
+        @Override
+        public void run() {
 
+        }
+    };
     public void rollDice(View view) {
         if(!game) return;
         ImageView i= findViewById(R.id.DiceImage);
         Random rand=new Random();
-        int d=rand.nextInt(6);
+        int d=rand.nextInt(6)+1;
         switch (d)
         {
             case 1:

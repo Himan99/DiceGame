@@ -12,12 +12,15 @@
     android:paddingTop="16dp"
     >
 
+
+
     <TextView
         android:id="@+id/textview"
         android:text="Your Score:,Computer score:"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        />
 
     <ImageView
         android:id="@+id/DiceImage"

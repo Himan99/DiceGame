@@ -6,6 +6,8 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,11 +41,13 @@ public class MainActivity extends AppCompatActivity {
         Random rand = new Random();
         int r = rand.nextInt(6) + 1;
             d=rand.nextInt(6)+1;
+        Animation animation1 =AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         switch (d)
         {
             case 1:
                 i.setImageResource(R.drawable.dice1);
                 Turnscore=0;
+                i.startAnimation(animation1);
                 setscore();
                 return;
             //break;
@@ -60,8 +64,12 @@ public class MainActivity extends AppCompatActivity {
         }
         Turnscore+=d;
         disp();
+        i.startAnimation(animation1);
         if(r<4)
-            handler.postDelayed(th,1000);
+        {
+            computer();
+            //handler.postDelayed(th,1000);
+        }
         else
             setscore();
 //        new android.os.Handler().postDelayed();
@@ -79,11 +87,13 @@ public class MainActivity extends AppCompatActivity {
         ImageView i= findViewById(R.id.DiceImage);
         Random rand=new Random();
         int d=rand.nextInt(6)+1;
+        Animation animation1 =AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
         switch (d)
         {
             case 1:
                 i.setImageResource(R.drawable.dice1);
                 Turnscore=0;
+                i.startAnimation(animation1);
                 setscore();
                 return;
 //                    break;
@@ -98,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
             case 6:i.setImageResource(R.drawable.dice6);
                 break;
         }
+        i.startAnimation(animation1);
         Turnscore+=d;
         disp();
     }

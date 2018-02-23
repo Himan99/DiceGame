@@ -67,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
         i.startAnimation(animation1);
         if(r<4)
         {
-            computer();
-            //handler.postDelayed(th,1000);
+//            computer();
+            handler.postDelayed(th,1000);
         }
         else
             setscore();

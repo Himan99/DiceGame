@@ -36,12 +36,13 @@ public class MainActivity extends AppCompatActivity {
     public void computer()
     {
         if(!game) return;
-        int d;
-        ImageView i= findViewById(R.id.DiceImage);
+        final int d;
+        final ImageView i= findViewById(R.id.DiceImage);
         Random rand = new Random();
-        int r = rand.nextInt(6) + 1;
+        int r = rand.nextInt(10) + 1;
             d=rand.nextInt(6)+1;
-        Animation animation1 =AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
+        final Animation animation1 =AnimationUtils.loadAnimation(getApplicationContext(),R.anim.clockwise);
+        i.startAnimation(animation1);
         switch (d)
         {
             case 1:
@@ -65,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
         Turnscore+=d;
         disp();
         i.startAnimation(animation1);
-        if(r<4)
+        if(r<=6)
         {
 //            computer();
             handler.postDelayed(th,1000);
@@ -84,31 +85,38 @@ public class MainActivity extends AppCompatActivity {
     };
     public void rollDice(View view) {
         if(!game||turn) return;
-        ImageView i= findViewById(R.id.DiceImage);
+        final ImageView i= findViewById(R.id.DiceImage);
         Random rand=new Random();
-        int d=rand.nextInt(6)+1;
-        Animation animation1 =AnimationUtils.loadAnimation(getApplicationContext(),R.anim.fade_in);
-        switch (d)
-        {
-            case 1:
-                i.setImageResource(R.drawable.dice1);
-                Turnscore=0;
-                i.startAnimation(animation1);
-                setscore();
-                return;
-//                    break;
-            case 2:i.setImageResource(R.drawable.dice2);
-                break;
-            case 3:i.setImageResource(R.drawable.dice3);
-                break;
-            case 4:i.setImageResource(R.drawable.dice4);
-                break;
-            case 5:i.setImageResource(R.drawable.dice5);
-                break;
-            case 6:i.setImageResource(R.drawable.dice6);
-                break;
-        }
+        final int d=rand.nextInt(6)+1;
+        final Animation animation1 =AnimationUtils.loadAnimation(getApplicationContext(),R.anim.clockwise);
         i.startAnimation(animation1);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                switch (d)
+                {
+                    case 1:
+                        i.setImageResource(R.drawable.dice1);
+                        Turnscore=0;
+                        i.startAnimation(animation1);
+                        setscore();
+                        return;
+//                    break;
+                    case 2:i.setImageResource(R.drawable.dice2);
+                        break;
+                    case 3:i.setImageResource(R.drawable.dice3);
+                        break;
+                    case 4:i.setImageResource(R.drawable.dice4);
+                        break;
+                    case 5:i.setImageResource(R.drawable.dice5);
+                        break;
+                    case 6:i.setImageResource(R.drawable.dice6);
+                        break;
+                }
+                i.startAnimation(animation1);
+            }
+        },400);
+
         Turnscore+=d;
         disp();
     }
